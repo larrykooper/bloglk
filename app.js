@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var methodOverride = require('method-override');
+var user = require('./lib/middleware/user');
 
 // Now we require the route logic
 var entries = require('./routes/entries');
@@ -13,6 +14,7 @@ var register = require('./routes/register');
 var messages = require('./lib/messages');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var login = require('./routes/login');
 
 var app = express();
 
@@ -29,6 +31,7 @@ app.use(cookieParser());
 app.use(session({ secret: 'fjfwienvnwinviw', key: 'sid', cookie: { secure: true }}))
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(user);
 app.use(messages);
 
 // Routes are here
@@ -37,8 +40,9 @@ app.post('./register', register.submit);
 app.get('/', entries.list);
 app.get('/post', entries.form);
 app.post('/post', entries.submit);
-//app.use('/', routes);
-app.use('/users', users);
+app.get('/login', login.form);
+app.post('/login', login.submit);
+app.get('/logout', login.logout);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

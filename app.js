@@ -4,8 +4,14 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var connect = require('connect');
+var session = require('express-session');
+var methodOverride = require('method-override');
 
+// Now we require the route logic
 var entries = require('./routes/entries');
+var register = require('./routes/register');
+var messages = require('./lib/messages');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -19,9 +25,16 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+app.use(methodOverride());
 app.use(cookieParser());
+app.use(session({ secret: 'fjfwienvnwinviw', key: 'sid', cookie: { secure: true }}))
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(messages);
+
+// Routes are here
+app.get('/register', register.form);
+app.post('./register', register.submit);
 app.get('/', entries.list);
 app.get('/post', entries.form);
 app.post('/post', entries.submit);
@@ -58,6 +71,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;

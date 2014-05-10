@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(methodOverride());
 app.use(cookieParser());
-app.use(session({ secret: 'fjfwienvnwinviw', key: 'sid', cookie: { secure: true }}))
+app.use(session({ secret: 'fjfwienvnwinviw', key: 'sid', cookie: { secure: false, maxAge: 65536 }}))
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(user);
@@ -36,7 +36,7 @@ app.use(messages);
 
 // Routes are here
 app.get('/register', register.form);
-app.post('./register', register.submit);
+app.post('/register', register.submit);
 app.get('/', entries.list);
 app.get('/post', entries.form);
 app.post('/post', entries.submit);

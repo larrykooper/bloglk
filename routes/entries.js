@@ -22,6 +22,7 @@ exports.submit = function(req, res, next) {
     var data = req.body.entry; 
     
     var entry = new Entry({
+        "username": res.locals.user.name,
         "title": data.title,
         "body": data.body
     });

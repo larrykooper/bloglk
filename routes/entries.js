@@ -7,7 +7,7 @@ exports.list = function(req, res, next) {
         
         // Render HTTP response 
         res.render('entries', {
-            title: 'Entries',
+            title: 'larrykooper.com',
             entries: entries,
         });
          

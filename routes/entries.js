@@ -32,3 +32,17 @@ exports.submit = function(req, res, next) {
         res.redirect('/');
     });
 };
+
+exports.editposts = function(req, res, next) {
+    Entry.getRange(0, -1, function(err, entries) {
+        if (err) return next(err);
+        res.render('edit-posts', {
+            title: 'Editing posts',
+            entries: entries,
+        });
+    });
+};
+
+exports.edit = function(req, res) {
+    res.render('edit-post', {title:'Editing post'});
+}

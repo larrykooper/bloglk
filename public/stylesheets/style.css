@@ -6,3 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
+
+.entry-for-edit {
+    margin-top: 10px;
+}

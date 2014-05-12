@@ -43,6 +43,9 @@ app.post('/post', entries.submit);
 app.get('/login', login.form);
 app.post('/login', login.submit);
 app.get('/logout', login.logout);
+app.get('/editposts', entries.editposts);
+// GET /posts/:id/edit
+app.get(/^\/posts\/(\d+)\/edit$/, entries.edit);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

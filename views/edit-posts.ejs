@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <% include menu %>
+    
+    <% entries.forEach(function(entry) { %>
+        <div class='entry-for-edit'>
+            <div>
+                <a><%= entry.title %></a>
+            </div>
+            <a href="/posts/0/edit">Edit</a>
+            |
+            <a>Delete</a>
+        </div>
+    <% }) %>    
+</body>
+</html>
+

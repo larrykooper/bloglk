@@ -4,22 +4,24 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
-<body>
+<body class="edit-post">
     <% include menu %>
-    
+
     <h1><%= title %></h1>
     <p>Fill in the form below to edit a post.</p>
      <% include messages %>
-     
-     <form action='/post' method='post'>
+     <% var action = "/post/".concat(post_nbr, "/update"); %>
+     <form action='<%= action %>' method='post'>
          <p>
-             <input type='text' name='entry[title]' placeholder='Title' />
+             <input type='text' name='post[title]' value='<%= post.title %>' />
          </p>
          <p>
-             <textarea name='entry[body]' placeholder='Body'></textarea>
+             <textarea name='post[body]'>
+             <%= post.body  %>
+             </textarea>
          </p>
          <p>
-             <input type='submit' value='Post' />
+             <input type='submit' value='Update' />
          </p>
      </form>     
     </body>

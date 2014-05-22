@@ -34,6 +34,10 @@ exports.submit = function(req, res, next) {
 };
 
 exports.editposts = function(req, res, next) {
+    // getRange is a model method
+    // zero is the beginning and -1 is the end
+    // the function is the callback
+    // entries is an array
     Entry.getRange(0, -1, function(err, entries) {
         if (err) return next(err);
         res.render('edit-posts', {
@@ -43,6 +47,19 @@ exports.editposts = function(req, res, next) {
     });
 };
 
-exports.edit = function(req, res) {
-    res.render('edit-post', {title:'Editing post'});
-}
+exports.edit = function(req, res, next) {
+    // now we get the post from Redis
+    var post_nbr = req.params.id;
+    Entry.getEntry(post_nbr, function(err, post) {
+        if (err) return next(err);
+        res.render('edit-post', {
+            title:'Editing post',
+            post: post,
+            post_nbr: post_nbr,
+        });
+    });
+};
+
+exports.update = function(req, res, next) {
+    // lkhere
+};

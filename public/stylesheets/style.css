@@ -10,3 +10,10 @@ a {
 .entry-for-edit {
     margin-top: 10px;
 }
+
+/* Editing a post   */
+
+.edit-post textarea {
+    width: 650px;
+    height: 550px;
+}

@@ -7,12 +7,13 @@
 <body>
     <% include menu %>
     
-    <% entries.forEach(function(entry) { %>
+    <% entries.forEach(function(entry, index) { %>
         <div class='entry-for-edit'>
             <div>
                 <a><%= entry.title %></a>
             </div>
-            <a href="/posts/0/edit">Edit</a>
+            <% var link = "/posts/".concat(index, "/edit");  %>
+            <a href="<%= link%>">Edit</a>
             |
             <a>Delete</a>
         </div>
